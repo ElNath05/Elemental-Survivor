@@ -2,15 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class Reposition : MonoBehaviour
 {
-    public static GameManager Instance;
-    public GameObject player;
-
-    private void Awake()
-    {
-        
-    }
     // Start is called before the first frame update
     void Start()
     {
@@ -21,5 +14,13 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Area"))
+        {
+            Vector3 playerPos = GameManager.Instance.player.transform.position;
+        }
     }
 }
