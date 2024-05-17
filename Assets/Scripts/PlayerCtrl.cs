@@ -22,13 +22,12 @@ public class PlayerCtrl : MonoBehaviour
     {
         float h = Input.GetAxis("Horizontal");  //수평방향 입력값을 받아옴
         float v = Input.GetAxis("Vertical");    //수직방향 입력값을 받아옴
-        moveDir = ((Vector3.up * v) + (Vector3.right * h)); //수평, 수직 이동방향을 알아냄
-
-        transform.Translate(moveDir * pSpeed * Time.deltaTime); //플레이어를 입력방향으로 이동
+        moveDir = ((Vector3.up * v) + (Vector3.right * h)).normalized; //수평, 수직 이동방향을 알아냄
+        float moveSpeed = Mathf.Min((Vector3.up * v + Vector3.right * h).magnitude, 1.0f) * pSpeed; //벡터 크기가 1.0을 넘지 않도록 조절
+        transform.Translate(moveDir * moveSpeed * Time.deltaTime); //플레이어를 입력방향으로 이동
 
         Vector3 myPos = transform.position; //플레이어의 현재 위치좌표를 받아옴, (현재 사용하지않고있음, 이거 왜 적었더라)
 
-        Debug.Log(h);
         if(!sprite.flipX && h < 0)  //-x방향으로 입력중이면서 스프라이트가 좌우 반전되어있지 않다면 반전시킴 (왼쪽을 보도록함)
         {
             sprite.flipX = true;
