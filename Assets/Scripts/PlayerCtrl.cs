@@ -6,6 +6,7 @@ public class PlayerCtrl : MonoBehaviour
 {
     [SerializeField] private float pSpeed;
 
+    [HideInInspector] public Vector3 moveDir;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +18,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
-        Vector3 moveDir = ((Vector3.up * v) + (Vector3.right * h));
+        moveDir = ((Vector3.up * v) + (Vector3.right * h));
 
         transform.Translate(moveDir * pSpeed * Time.deltaTime);
 
