@@ -10,7 +10,9 @@ public class EnemyCtrl : MonoBehaviour
     private Vector3 playerPos;  //플레이어 좌표 저장용 변수
     private Vector3 pos;    //오브젝트 본체의 좌표
     private Vector3 moveDir;    //오브젝트가 이동할 벡터
-    private bool getPos = false;
+    private bool getPos = false;    //플레이어의 위치를 가져왔는지 확인할 변수
+
+    [HideInInspector] public float eHp = 1;
 
     SpriteRenderer sprite;
     // Start is called before the first frame update
@@ -57,9 +59,9 @@ public class EnemyCtrl : MonoBehaviour
                 }
                 break;
             case 3: //생성된 시점의 플레이어 좌표로 빠르게 날아가는 적
-                if (!getPos)
+                if (!getPos)    //플레이어의 좌표를 가져오지않았다면 실행
                 {
-                    getPos = true;
+                    getPos = true;  //플레이어의 좌표를 한번만(실시간X) 가져오도록 변수값을 변환
                     playerPos = GameManager.Instance.player.transform.position;
                     pos = transform.position;   //오브젝트의 좌표를 받아냄
                     moveDir = (playerPos - pos).normalized;  //오브젝트로부터 플레이어까지의 정규벡터를 구함

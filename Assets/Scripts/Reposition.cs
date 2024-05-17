@@ -11,7 +11,8 @@ public class Reposition : MonoBehaviour
     {
         playerCtrl = GameManager.Instance.player.GetComponent<PlayerCtrl>();    //플레이어의 스크립트를 가져옴
     }
-    void OnTriggerExit2D(Collider2D collision)  //플레이어의 특정범위를 벗어나면 실행
+
+    void OnTriggerExit2D(Collider2D collision)  //플레이어의 특정범위를 벗어나면 실행 (골드메탈의 무한 타일맵을 참조했습니다)
     {
         if (collision.CompareTag("Area"))
         {
@@ -45,11 +46,13 @@ public class Reposition : MonoBehaviour
                 case "Ground":
                     if(distX > distY)   //플레이어와의 거리 중 y축 간의 거리보다 x축간의 거리가 더 멀면 실행
                     {
-                        transform.Translate(Vector3.right * dirX * 40); //타일을 플레이어 x축 이동방향쪽으로 재배치
+                        //타일을 플레이어가 이동할 x축 방향 앞쪽에 재배치(40은 타일의 x축 전체 크기)
+                        transform.Translate(Vector3.right * dirX * 40); 
                     }
                     else if (distX < distY) //플레이어와의 거리 중 x축 간의 거리보다 y축간의 거리가 더 멀면 실행
                     {
-                        transform.Translate(Vector3.up * dirY * 40); //타일을 플레이어 y축 이동방향쪽으로 재배치
+                        //타일을 플레이어가 이동할 y축 방향 앞쪽에 재배치
+                        transform.Translate(Vector3.up * dirY * 40); 
                     }
                     break;
 
