@@ -8,8 +8,14 @@ public class GameManager : MonoBehaviour
     public GameObject player;
 
     private void Awake()
-    {
-        
+    { if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+
+        }
     }
     // Start is called before the first frame update
     void Start()
