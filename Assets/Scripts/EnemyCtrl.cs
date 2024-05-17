@@ -7,6 +7,9 @@ public class EnemyCtrl : MonoBehaviour
     [SerializeField] private int enemyType;
     [SerializeField] private float eSpeed;
 
+    private int savType;    //하이어라키 창에서 설정한 변수값을 저장하는변수
+    private float savSpeed; //하이어라키 창에서 설정한 변수값을 저장하는변수
+
     private Vector3 playerPos;  //플레이어 좌표 저장용 변수
     private Vector3 pos;    //오브젝트 본체의 좌표
     private Vector3 moveDir;    //오브젝트가 이동할 벡터
@@ -15,6 +18,12 @@ public class EnemyCtrl : MonoBehaviour
     [HideInInspector] public float eHp = 1;
 
     SpriteRenderer sprite;
+
+    private void Awake()
+    {
+        savSpeed = eSpeed;  //미리 설정된 변수를 따로 저장, 리셋 시 사용
+        savType = enemyType;    //미리 설정된 변수를 따로 저장, 리셋 시 사용
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -78,6 +87,38 @@ public class EnemyCtrl : MonoBehaviour
                 transform.Translate(moveDir * (eSpeed*2) * Time.deltaTime); //오브젝트가 플레이어를 따라가도록 이동시킴
 
                 break;
+        }
+
+        if(eHp < 0)
+        {
+            gameObject.SetActive(false);
+        }
+    }
+
+    private void Reset()    //오브젝트 변수들을 초기화 하는 함수
+    {
+        eSpeed = savSpeed;
+        enemyType = savType;
+        playerPos = new Vector3(0, 0, 0);
+        pos = new Vector3(0, 0, 0);
+        moveDir = new Vector3(0, 0, 0);
+        getPos = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Weapon"))
+        {
+            
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Area") && enemyType == 3) //타입3 적이 일정 범위를 넘어가면 리셋 후 비활성화
+        {
+            Reset();
+            gameObject.SetActive(false) ;
         }
     }
 }

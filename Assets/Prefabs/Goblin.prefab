@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3189623072032430622}
   - component: {fileID: 7220980920316070778}
   - component: {fileID: -4043150303064951468}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Goblin
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -123,6 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyType: 1
   eSpeed: 3
+  eHp: 0
 --- !u!61 &7220980920316070778
 BoxCollider2D:
   m_ObjectHideFlags: 0
