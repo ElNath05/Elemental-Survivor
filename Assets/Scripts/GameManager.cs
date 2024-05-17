@@ -9,8 +9,11 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     public PoolManager pool;
 
-    private float sec;  //게임 시간중 초를 세는 변수
-    private float min;  //게임 시간중 분을 세는 변수
+    private float sec;  //게임 시간 초를 세는 변수
+    private float min;  //게임 시간 분을 세는 변수
+    
+    private int[] weaponLevel;
+
     public Text time;
     private void Awake()
     { if (Instance == null)

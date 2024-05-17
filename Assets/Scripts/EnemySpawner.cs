@@ -22,7 +22,12 @@ public class EnemySpawner : MonoBehaviour
         {
             SpawnBat();
         }
-        
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SpawnRound();
+        }
+
     }
     void SpawnBasic()   //플레이어를 따라가는 일반 적 생성
     {
@@ -61,6 +66,22 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnRound()   //플레이어를 감싸는 적 생성
     {
+        Vector3 playerPos = GameManager.Instance.player.transform.position; //플레이어의 현재 위치값을 가져옴
+        float radius = 10f;
+        float angleStep = 360f/20;
+        for(int i = 0; i < 20; i++)
+        {
+            GameObject enemy = GameManager.Instance.pool.Get(1);
 
+            float angle = angleStep * i;
+            
+            float angleRad = angle*Mathf.Deg2Rad;
+
+            float posX = playerPos.x + Mathf.Cos(angleRad)*radius;
+            float posY = playerPos.y + Mathf.Sin(angleRad)*radius;
+
+            Vector3 spawnPos = new Vector3(posX, posY, 0);
+            enemy.transform.position = spawnPos;
+        }
     }
 }
