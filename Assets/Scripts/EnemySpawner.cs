@@ -67,21 +67,21 @@ public class EnemySpawner : MonoBehaviour
     void SpawnRound()   //플레이어를 감싸는 적 생성
     {
         Vector3 playerPos = GameManager.Instance.player.transform.position; //플레이어의 현재 위치값을 가져옴
-        float radius = 10f;
-        float angleStep = 360f/20;
+        float radius = 10f; //플레이어까지의 거리
+        float angleStep = 360f/20;  //360도를 20등분으로 나누어 스폰할 몬스터의 간격 설정
         for(int i = 0; i < 20; i++)
         {
             GameObject enemy = GameManager.Instance.pool.Get(1);
 
-            float angle = angleStep * i;
+            float angle = angleStep * i;    //i값 만큼 각도 크기 계산
             
-            float angleRad = angle*Mathf.Deg2Rad;
+            float angleRad = angle*Mathf.Deg2Rad;   //각도를 라디안으로 변환
 
-            float posX = playerPos.x + Mathf.Cos(angleRad)*radius;
-            float posY = playerPos.y + Mathf.Sin(angleRad)*radius;
+            float posX = playerPos.x + Mathf.Cos(angleRad)*radius;  //플레이어 위치 기준으로 x좌표 계산
+            float posY = playerPos.y + Mathf.Sin(angleRad)*radius;  //플레이어 위치 기준으로 y좌표 계산
 
-            Vector3 spawnPos = new Vector3(posX, posY, 0);
-            enemy.transform.position = spawnPos;
+            Vector3 spawnPos = new Vector3(posX, posY, 0);  //스폰좌표 지정
+            enemy.transform.position = spawnPos;    //적 위치 설정
         }
     }
 }
