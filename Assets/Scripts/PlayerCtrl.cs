@@ -10,11 +10,13 @@ public class PlayerCtrl : MonoBehaviour
 
     Animator animator;
     SpriteRenderer sprite;
+    public Scanner scanner;
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
+        scanner = GetComponent<Scanner>();
     }
 
     // Update is called once per frame

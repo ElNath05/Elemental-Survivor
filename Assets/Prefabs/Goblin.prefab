@@ -123,7 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyType: 1
   eSpeed: 3
-  eHp: 0
+  eHp: 20
 --- !u!61 &7220980920316070778
 BoxCollider2D:
   m_ObjectHideFlags: 0

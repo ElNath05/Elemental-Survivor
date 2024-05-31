@@ -11,8 +11,9 @@ public class GameManager : MonoBehaviour
 
     private float sec;  //게임 시간 초를 세는 변수
     private float min;  //게임 시간 분을 세는 변수
-    
-    private int[] weaponLevel;
+
+    public float exp;
+    public int level;
 
     public Text time;
     private void Awake()
@@ -61,6 +62,12 @@ public class GameManager : MonoBehaviour
             {
                 time.text = min.ToString("F0") + ":" + sec.ToString("F0");
             }
+        }
+
+        if(exp > 2 * (level + 2))
+        {
+            level++;
+            exp = 0;
         }
     }
 }
