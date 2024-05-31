@@ -14,7 +14,7 @@ public class WeaponSpawn : MonoBehaviour
 
     PlayerCtrl playerCtrl;
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         playerCtrl = GameManager.Instance.player.GetComponent<PlayerCtrl>();
     }
@@ -79,7 +79,7 @@ public class WeaponSpawn : MonoBehaviour
                 SetWeapon();
                 break;
             default:
-                wSpeed = 2;
+                wSpeed = 2; //무기의 재사용 시간을 지정
                 break;
         }
     }

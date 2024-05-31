@@ -10638,7 +10638,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1820533465
 Transform:
   m_ObjectHideFlags: 0
@@ -10670,7 +10670,7 @@ MonoBehaviour:
   poolId: 4
   damage: 10
   level: 0
-  wSpeed: 0
+  wSpeed: 2
 --- !u!1 &1828627824
 GameObject:
   m_ObjectHideFlags: 0
@@ -10708,6 +10708,7 @@ MonoBehaviour:
   pSpeed: 4
   moveDir: {x: 0, y: 0, z: 0}
   scanner: {fileID: 0}
+  pHp: 0
 --- !u!50 &1828627826
 Rigidbody2D:
   serializedVersion: 4
@@ -10777,7 +10778,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 1
   m_Sprite: {fileID: 4723107735738678597, guid: 174209194dbf2fb44aef1ea1ba76a2f1, type: 3}
-  m_Color: {r: 0.9924528, g: 0.9924528, b: 0.9924528, a: 1}
+  m_Color: {r: 0.83396226, g: 0.83396226, b: 0.83396226, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

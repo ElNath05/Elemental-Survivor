@@ -11,6 +11,7 @@ public class PlayerCtrl : MonoBehaviour
     Animator animator;
     SpriteRenderer sprite;
     public Scanner scanner;
+    public int pHp;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,5 +45,13 @@ public class PlayerCtrl : MonoBehaviour
 
         //방향입력값의 절대값들의 합을 애니메이션 변수에 대입 (움직임 입력이 있으면 달리기 애니메이션 재생)
         animator.SetFloat("Run", Mathf.Abs(h) + Mathf.Abs(v));  
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
+        {
+
+        }
     }
 }

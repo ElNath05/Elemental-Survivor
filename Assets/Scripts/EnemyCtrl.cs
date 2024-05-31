@@ -11,6 +11,8 @@ public class EnemyCtrl : MonoBehaviour
     private float savSpeed; //하이어라키 창에서 설정한 적 속도를 저장하는변수
     private float savHp;    //적 체력을 저장하는 변수
 
+    private float dispawnTime;  //원형으로 둘러싸는 적들이 생성된 시간을 재는 타이머
+
     private Vector3 playerPos;  //플레이어 좌표 저장용 변수
     private Vector3 pos;    //오브젝트 본체의 좌표
     private Vector3 moveDir;    //오브젝트가 이동할 벡터
@@ -63,6 +65,7 @@ public class EnemyCtrl : MonoBehaviour
                 }
                 break;
             case 2: //플레이어를 매우 느리게 따라오는 적 (플레이어를 둘러싸는 적)
+                dispawnTime += Time.deltaTime;
                 playerPos = GameManager.Instance.player.transform.position; //플레이어의 실시간 좌표를 받아냄
                 pos = transform.position;   //오브젝트의 좌표를 받아냄
                 moveDir = (playerPos - pos).normalized;  //오브젝트로부터 플레이어까지의 정규벡터를 구함
@@ -76,6 +79,11 @@ public class EnemyCtrl : MonoBehaviour
                 else if (moveDir.x < 0 && !sprite.flipX)
                 {
                     sprite.flipX = true;
+                }
+                if(dispawnTime > 20f)
+                {
+                    Reset();
+                    gameObject.SetActive(false);
                 }
                 break;
             case 3: //생성된 시점의 플레이어 좌표로 빠르게 날아가는 적
@@ -106,13 +114,13 @@ public class EnemyCtrl : MonoBehaviour
         }
     }
 
-    IEnumerator KnockBack()
-    {
-        yield return wait;
-        Vector3 playerPos = GameManager.Instance.player.transform.position;
-        Vector3 dirVec = transform.position - playerPos;
-        rb.AddForce(dirVec.normalized*3,ForceMode2D.Impulse);
-    }
+    //IEnumerator KnockBack()
+    //{
+    //    yield return wait;
+    //    Vector3 playerPos = GameManager.Instance.player.transform.position;
+    //    Vector3 dirVec = transform.position - playerPos;
+    //    rb.AddForce(dirVec.normalized*3,ForceMode2D.Impulse);
+    //}
 
     private void Reset()    //오브젝트 변수들을 초기화 하는 함수
     {
@@ -130,13 +138,17 @@ public class EnemyCtrl : MonoBehaviour
         if (collision.CompareTag("Weapon"))
         {
             eHp -= collision.GetComponent<Weapon>().damage;
-            StartCoroutine(KnockBack());
+            //StartCoroutine(KnockBack());
             if(eHp > 0)
             {
                 animator.SetTrigger("Hit");
             }
             else
             {
+                if (enemyType == 1)
+                {
+                    animator.SetBool("Dead",true);
+                }
                 Reset();
                 GameManager.Instance.exp++;
                 gameObject.SetActive(false);
@@ -144,6 +156,10 @@ public class EnemyCtrl : MonoBehaviour
         }
     }
 
+    void Die()
+    {
+
+    }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Area") && enemyType == 3) //타입3 적이 카메라의 일정 범위를 넘어가면 리셋 후 비활성화

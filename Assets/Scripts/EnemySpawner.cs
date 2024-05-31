@@ -5,6 +5,8 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     private float e_SpawnTime;
+    private float b_SpawnTime;
+    private float m_SpawnTime;
 
     private float minDistB = 7.5f;  //Basic타입 적이 생성될 최소 거리
     private float maxDistB = 10f;   //Basic타입 적이 생성될 최대 거리
@@ -18,13 +20,17 @@ public class EnemySpawner : MonoBehaviour
             SpawnBasic();
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        b_SpawnTime += Time.deltaTime;
+        if (b_SpawnTime > 180f || Input.GetKeyDown(KeyCode.R))
         {
+            b_SpawnTime = 0;
             SpawnBat();
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
+        m_SpawnTime = Time.time;
+        if (m_SpawnTime > 300f || Input.GetKeyDown(KeyCode.Space))
         {
+            m_SpawnTime = 0;
             SpawnRound();
         }
 

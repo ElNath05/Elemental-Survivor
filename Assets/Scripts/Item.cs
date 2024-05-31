@@ -38,6 +38,17 @@ public class Item : MonoBehaviour
                     weapon = newWeapon.AddComponent<WeaponSpawn>();
                     weapon.Init(data);
                 }
+                else
+                {
+                    float nextDamage = data.baseDamage;
+                    int nextCount = 0;
+
+                    nextDamage += data.baseDamage * data.damages[level];
+                    nextCount += data.counts[level];
+
+                    weapon.LevelUp(nextDamage, nextCount);
+                }
+                level++;
                 break;
             case ItemData.ItemType.Heal:
                 break;

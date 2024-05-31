@@ -18,6 +18,15 @@ public class Scanner : MonoBehaviour
         nearTarget = GetNearest();
     }
 
+    Transform GetRandomTarget() //레이범위에 들어온 타겟 중 랜덤한 하나의 타겟을 가져옴
+    {
+        Transform result = null;
+        int randNum = Random.Range(0, targets.Length);
+
+        result = targets[randNum].transform;
+        return result;
+    }
+
     Transform GetNearest()
     {
         Transform result = null;
