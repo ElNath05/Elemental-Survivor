@@ -123,7 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyType: 2
   eSpeed: 3
-  eHp: 1
+  eHp: 50
 --- !u!70 &-4737999723720363054
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

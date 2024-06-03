@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da83fccece61e4346a159d283d69e58e, type: 3}
-  m_Name: Item 1
+  m_Name: Fireball
   m_EditorClassIdentifier: 
-  itemType: 0
-  itemId: 0
-  itemName: "\uC804\uAE30 \uAD6C\uCCB4"
+  itemType: 1
+  itemId: 1
+  itemName: "\uD654\uC5FC\uAD6C"
   itemDesc: 
-  itemIcon: {fileID: -2895734620076278133, guid: a4ce094c050bd4387bb4ca527872a97e, type: 3}
-  baseDamage: 5
-  baseCount: 3
+  itemIcon: {fileID: -6593606932326986480, guid: 932ad7a4b3b6e489caf198803bc034af, type: 3}
+  baseDamage: 3
+  baseCount: 0
   damages:
   - 0.5
   - 1
@@ -26,4 +26,4 @@ MonoBehaviour:
   - 2
   - 3
   counts: 0100000001000000010000000100000002000000
-  projectile: {fileID: 4598310608379763464, guid: 0e5a774974972294c9eeab105e4db57b, type: 3}
+  projectile: {fileID: 393904825578567849, guid: 42f246fcd38dde44b9bc74676569f839, type: 3}

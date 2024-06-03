@@ -10,7 +10,7 @@ public class WeaponSpawn : MonoBehaviour
     public int level;   //무기 레벨   
     public float wSpeed;    //무기 속도
 
-    float wTimer;   //무기 생성 타이머
+    float wTimer;   //무기 생성주기 타이머
 
     PlayerCtrl playerCtrl;
     // Start is called before the first frame update
@@ -60,7 +60,7 @@ public class WeaponSpawn : MonoBehaviour
         transform.parent = GameManager.Instance.player.transform;   //오브젝트의 부모를 플레이어로 지정
         transform.localPosition = Vector3.zero; //localposition을 원점으로 변경
 
-        id = data.itemId;
+        id = data.itemId;   //무기의 아이디, 데미지 등은 데이터에 저장된값을 가져옴
         damage = data.baseDamage;
         level = data.baseCount;
 

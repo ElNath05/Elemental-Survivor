@@ -44,7 +44,7 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    void Erase()
+    void Erase()    //무기가 일정거리 이상으로 멀어지면 자동으로 비활성화
     {
         Transform target = GameManager.Instance.player.transform;
         Vector3 targetPos = target.position;

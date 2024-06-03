@@ -43,8 +43,17 @@ public class EnemyCtrl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Hit"))
-            return;
+        //if (animator.GetCurrentAnimatorStateInfo(0).IsName("Hit"))
+        //    return;
+
+        if(transform.position.y < GameManager.Instance.player.transform.position.y)
+        {
+            sprite.sortingOrder = 2;
+        }
+        else
+        {
+            sprite.sortingOrder = 0;
+        }
 
         switch (enemyType)
         {
@@ -156,10 +165,6 @@ public class EnemyCtrl : MonoBehaviour
         }
     }
 
-    void Die()
-    {
-
-    }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Area") && enemyType == 3) //타입3 적이 카메라의 일정 범위를 넘어가면 리셋 후 비활성화

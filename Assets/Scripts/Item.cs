@@ -23,20 +23,21 @@ public class Item : MonoBehaviour
 
     private void LateUpdate()
     {
-        textLevel.text = "Lv." + (level + 1);   
+        textLevel.text = "Lv." + (level + 1);
     }
 
-    public void OnClick()
+    public void OnClick()   
     {
-        switch(data.itemType)
+        switch(data.itemType)   //아이템 타입에 따른 레벨업
         {
             case ItemData.ItemType.Eball:
             case ItemData.ItemType.Fball:
-                if(level == 0)
+                if(level == 0)  //아이템 레벨이 0이면 새 오브젝트를 만들고 무기의 init함수에 아이템 데이터를 넣어 실행
                 {
                     GameObject newWeapon = new GameObject();
                     weapon = newWeapon.AddComponent<WeaponSpawn>();
                     weapon.Init(data);
+
                 }
                 else
                 {
@@ -48,7 +49,6 @@ public class Item : MonoBehaviour
 
                     weapon.LevelUp(nextDamage, nextCount);
                 }
-                level++;
                 break;
             case ItemData.ItemType.Heal:
                 break;

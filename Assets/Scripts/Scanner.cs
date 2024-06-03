@@ -9,17 +9,21 @@ public class Scanner : MonoBehaviour
     public LayerMask targetLayer2;
     public RaycastHit2D[] targets;  //범위에 들어온 적들을 담는 배열
     public Transform nearTarget;    //가까운 적의 트랜스폼
-
+    public Transform randTarget;    //범위 내의 무작위의 적의 트랜스폼
     void FixedUpdate()
     {
         //(레이캐스트의 시작위치, 범위, 캐스팅방향, 캐스팅 길이, 적의 레이어) 원형캐스트는 방향이 필요없기때문에 Vectro2.zero를 사용
         targets = Physics2D.CircleCastAll(transform.position, scanRange, Vector2.zero, 0, targetLayer);  //원형의 레이범위 내에 들어온 오브젝트들을 리스트에 넣음
         //targets = Physics2D.CircleCastAll(transform.position, scanRange, Vector2.zero, 0, targetLayer2);
         nearTarget = GetNearest();
+        randTarget = GetRandomTarget();
     }
 
     Transform GetRandomTarget() //레이범위에 들어온 타겟 중 랜덤한 하나의 타겟을 가져옴
     {
+        if (targets.Length == 0)
+            return null;
+
         Transform result = null;
         int randNum = Random.Range(0, targets.Length);
 
