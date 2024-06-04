@@ -27,7 +27,7 @@ public class PlayerCtrl : MonoBehaviour
         float v = Input.GetAxis("Vertical");    //수직방향 입력값을 받아옴
         moveDir = ((Vector3.up * v) + (Vector3.right * h)).normalized; //수평, 수직 이동방향을 알아냄
 
-        //벡터 크기가 1.0을 넘지 않도록 조절 (코드 참고 https://velog.io/@nagi0101/Unity-%ED%94%8C%EB%A0%88%EC%9D%B4%EC%96%B4%EC%9D%98-%EB%8C%80%EA%B0%81%EC%84%A0-%EC%9D%B4%EB%8F%99%EC%8B%9C-%EC%86%8D%EB%8F%84-%EC%B2%98%EB%A6%AC )
+        //벡터 크기가 1.0을 넘지 않도록 조절
         float moveSpeed = Mathf.Min((Vector3.up * v + Vector3.right * h).magnitude, 1.0f) * pSpeed;
 
         transform.Translate(moveDir * moveSpeed * Time.deltaTime); //플레이어를 입력방향으로 이동

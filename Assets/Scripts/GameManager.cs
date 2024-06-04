@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public int level;
 
     public Text time;
+    public Slider expGage;
     private void Awake()
     { if (Instance == null)
         {
@@ -35,7 +36,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        sec += Time.deltaTime;
+        sec += Time.deltaTime; 
         if(sec > 59.5)
         {
             sec = 0;
@@ -64,10 +65,14 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if(exp > 2 * (level + 2))
+
+        float maxExp = 2 * (level + 2); //현재 레벨에 따라 다음 경험치 요구량을 설정
+        if (exp > maxExp)  //경험치가 최대경험치를 넘으면 레벨업하고 경험치를 초기화
         {
             level++;
             exp = 0;
         }
+
+        expGage.value = exp / maxExp;   //현재 경험치에 따른 경험치바량 설정
     }
 }

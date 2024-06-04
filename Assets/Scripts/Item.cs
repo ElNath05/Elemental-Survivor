@@ -32,6 +32,7 @@ public class Item : MonoBehaviour
         {
             case ItemData.ItemType.Eball:
             case ItemData.ItemType.Fball:
+            case ItemData.ItemType.Fground:
                 if(level == 0)  //아이템 레벨이 0이면 새 오브젝트를 만들고 무기의 init함수에 아이템 데이터를 넣어 실행
                 {
                     GameObject newWeapon = new GameObject();

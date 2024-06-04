@@ -13,6 +13,8 @@ public class EnemyCtrl : MonoBehaviour
 
     private float dispawnTime;  //원형으로 둘러싸는 적들이 생성된 시간을 재는 타이머
 
+    [SerializeField]private float hitTimer; //지속피해를 입는 간격을 정하는 타이머
+
     private Vector3 playerPos;  //플레이어 좌표 저장용 변수
     private Vector3 pos;    //오브젝트 본체의 좌표
     private Vector3 moveDir;    //오브젝트가 이동할 벡터
@@ -142,6 +144,36 @@ public class EnemyCtrl : MonoBehaviour
         eHp = savHp;
     }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        // 지속딜 타입이면 일정시간 주기로 데미지를 입음
+        if (collision.CompareTag("Weapon2"))
+        {
+            hitTimer += Time.deltaTime;
+            if (hitTimer > 1)
+            {
+                eHp -= collision.GetComponent<Weapon>().damage;
+                //StartCoroutine(KnockBack());
+                if (eHp > 0)
+                {
+                    animator.SetTrigger("Hit");
+                }
+                else
+                {
+                    if (enemyType == 1)
+                    {
+                        animator.SetBool("Dead", true);
+                    }
+                    Reset();
+                    GameManager.Instance.exp++;
+                    gameObject.SetActive(false);
+                }
+
+                hitTimer = 0;
+            }
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Weapon"))
@@ -163,6 +195,28 @@ public class EnemyCtrl : MonoBehaviour
                 gameObject.SetActive(false);
             }
         }
+
+        //지속피해형식의 무기가 처음 적에게 닿았을 때에 즉시 피해를 주기위해 사용
+        if (collision.CompareTag("Weapon2"))
+        {
+            eHp -= collision.GetComponent<Weapon>().damage;
+            //StartCoroutine(KnockBack());
+            if (eHp > 0)
+            {
+                animator.SetTrigger("Hit");
+            }
+            else
+            {
+                if (enemyType == 1)
+                {
+                    animator.SetBool("Dead", true);
+                }
+                Reset();
+                GameManager.Instance.exp++;
+                gameObject.SetActive(false);
+            }
+        }
+
     }
 
     private void OnTriggerExit2D(Collider2D collision)

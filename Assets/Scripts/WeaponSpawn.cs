@@ -24,17 +24,21 @@ public class WeaponSpawn : MonoBehaviour
     {
         switch (id)
         {
-            case 0:
+            case 0: //전기구체
                 transform.Rotate(Vector3.back * wSpeed * Time.deltaTime);   //무기를 시계방향으로 회전
+
                 break;
-            default:
+            case 1: //화염구
                 wTimer += Time.deltaTime;
 
                 if(wTimer > wSpeed) //타이머가 일정시간이 지나면 발사함수 실행, *스피드를 기준시간으로 사용*
                 {
                     wTimer = 0;
-                    Fire();
+                    FireBall();
                 }
+                break;
+            case 2: //불장판
+
                 break;
         }
 
@@ -78,8 +82,11 @@ public class WeaponSpawn : MonoBehaviour
                 wSpeed = 150;   //무기의 회전속도를 지정
                 SetWeapon();
                 break;
-            default:
+            case 1:
                 wSpeed = 2; //무기의 재사용 시간을 지정
+                break;
+            case 2:
+                FireGround();
                 break;
         }
     }
@@ -112,7 +119,24 @@ public class WeaponSpawn : MonoBehaviour
         }
     }
 
-    void Fire()
+    void FireGround()
+    {
+        Transform weapon;
+        if (0 < transform.childCount)    //이미 생성된 무기가 자식으로 있으면
+        {
+            weapon = transform.GetChild(0);     //생성된 무기를 재활용
+        }
+        else
+        {
+            weapon = GameManager.Instance.pool.Get(poolId).transform;   //무기 프리펩을 풀에서 가져옴
+        }
+        weapon.parent = transform; //프리펩의 부모를 플레이어로 변경
+
+        weapon.localPosition = Vector3.zero;    //생성한 무기 위치 초기화
+        weapon.localScale = new Vector3(weapon.localScale.x*level, weapon.localScale.y * level, weapon.localScale.z);
+        weapon.GetComponent<Weapon>().Init(damage, -1, Vector3.zero); //-1은 무한 관통
+    }
+    void FireBall()
     {
         if (!playerCtrl.scanner.nearTarget) //가까운 타겟이 없으면 함수 탈출
             return;
@@ -123,7 +147,9 @@ public class WeaponSpawn : MonoBehaviour
 
         Transform fBall = GameManager.Instance.pool.Get(poolId).transform;  //풀에서 무기 프리펩을 가져옴
         fBall.position = transform.position;    //무기 위치 조절
-        fBall.rotation = Quaternion.FromToRotation(Vector3.up, dir);    //무기를 vector.up축을 기준으로 바라보는 뱡향을 향하게 로테이션을 설정
+        float angle = Mathf.Atan2(dir.x, dir.y)*Mathf.Rad2Deg;
+        Quaternion rot = Quaternion.Euler(0, 0, angle+180);
+        fBall.rotation = rot;    //무기를 vector.up축을 기준으로 바라보는 뱡향을 향하게 로테이션을 설정
 
         fBall.GetComponent<Weapon>().Init(damage, level, dir);
     }
