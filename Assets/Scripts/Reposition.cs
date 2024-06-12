@@ -12,7 +12,7 @@ public class Reposition : MonoBehaviour
         playerCtrl = GameManager.Instance.player.GetComponent<PlayerCtrl>();    //플레이어의 스크립트를 가져옴
     }
 
-    void OnTriggerExit2D(Collider2D collision)  //플레이어의 특정범위를 벗어나면 실행 (골드메탈의 무한 타일맵을 참조했습니다)
+    void OnTriggerExit2D(Collider2D collision)  //플레이어의 특정범위를 벗어나면 실행
     {
         if (collision.CompareTag("Area"))
         {
