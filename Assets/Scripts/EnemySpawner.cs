@@ -9,6 +9,8 @@ public class EnemySpawner : MonoBehaviour
     private float m_SpawnTime;
     private float bossSpawnTime;
 
+    private bool bossSpawn;
+
     private float minDistB = 7.5f;  //Basic타입 적이 생성될 최소 거리
     private float maxDistB = 10f;   //Basic타입 적이 생성될 최대 거리
     // Update is called once per frame
@@ -17,35 +19,86 @@ public class EnemySpawner : MonoBehaviour
         if (!GameManager.Instance.isPlaying) //게임이 정지하면 업데이트함수 내의 시간이 안가도록 한다
             return;
         e_SpawnTime += Time.deltaTime; //적 생성 시간을 잼
-        if(e_SpawnTime > 1.5f)   //생성시간이 되면 타이머를 초기화 하고 적 소환함수 실행
+        if(e_SpawnTime > 0.75f && GameManager.Instance.min <= 3)   //생성시간이 되면 타이머를 초기화 하고 적 소환함수 실행
         {
             e_SpawnTime = 0;
             SpawnBasic();
         }
 
-        b_SpawnTime += Time.deltaTime;
-        if (b_SpawnTime > 180f || Input.GetKeyDown(KeyCode.R))
+        if (e_SpawnTime > 0.75f && GameManager.Instance.min >= 3 && GameManager.Instance.min < 5)   //생성시간이 되면 타이머를 초기화 하고 적 소환함수 실행
+        {
+            e_SpawnTime = 0;
+            SpawnBasic2();
+        }
+
+        if (e_SpawnTime > 0.75f && GameManager.Instance.min >= 5)   //생성시간이 되면 타이머를 초기화 하고 적 소환함수 실행
+        {
+            e_SpawnTime = 0;
+            SpawnBasic3();
+        }
+
+        b_SpawnTime += Time.deltaTime;  //박쥐 소환
+        if (b_SpawnTime > 60f)
         {
             b_SpawnTime = 0;
             SpawnBat();
         }
 
-        m_SpawnTime += Time.deltaTime;
-        if (m_SpawnTime > 300f || Input.GetKeyDown(KeyCode.Space))
+        m_SpawnTime += Time.deltaTime;  //둘러싸는 적 소환
+        if (m_SpawnTime > 150f)
         {
             m_SpawnTime = 0;
             SpawnRound();
         }
 
-        //bossSpawnTime += Time.time;
-        //if(bossSpawnTime >= 600f || Input.GetKeyDown(KeyCode.P))
-        //{
-
-        //}
+        if(GameManager.Instance.min > 10 && !bossSpawn) // 보스소환
+        {
+            bossSpawn = true;
+            SpawnBoss();
+        }
     }
     void SpawnBasic()   //플레이어를 따라가는 일반 적 생성
     {
         GameObject enemy = GameManager.Instance.pool.Get(0);    // index0에 해당하는 오브젝트를 가져옴
+
+        Vector3 playerPos = GameManager.Instance.player.transform.position; //플레이어의 현재 위치값을 가져옴
+        Vector2 randDir = Random.insideUnitCircle.normalized;   //랜덤방향의 벡터를 생성
+        float randDist = Random.Range(minDistB, maxDistB);  //오브젝트를 생성할 거리를 랜덤으로 받아냄
+
+        //플레이어 기준으로 특정 거리내에서 랜덤한 위치에 적 생성
+        Vector3 randPos = playerPos + new Vector3(randDir.x, randDir.y, 0) * randDist;
+        enemy.transform.position = randPos;
+    }
+
+    void SpawnBasic2()   //플레이어를 따라가는 일반 적 생성
+    {
+        GameObject enemy = GameManager.Instance.pool.Get(8);    // index0에 해당하는 오브젝트를 가져옴
+
+        Vector3 playerPos = GameManager.Instance.player.transform.position; //플레이어의 현재 위치값을 가져옴
+        Vector2 randDir = Random.insideUnitCircle.normalized;   //랜덤방향의 벡터를 생성
+        float randDist = Random.Range(minDistB, maxDistB);  //오브젝트를 생성할 거리를 랜덤으로 받아냄
+
+        //플레이어 기준으로 특정 거리내에서 랜덤한 위치에 적 생성
+        Vector3 randPos = playerPos + new Vector3(randDir.x, randDir.y, 0) * randDist;
+        enemy.transform.position = randPos;
+    }
+
+    void SpawnBasic3()   //플레이어를 따라가는 일반 적 생성
+    {
+        GameObject enemy = GameManager.Instance.pool.Get(9);    // index0에 해당하는 오브젝트를 가져옴
+
+        Vector3 playerPos = GameManager.Instance.player.transform.position; //플레이어의 현재 위치값을 가져옴
+        Vector2 randDir = Random.insideUnitCircle.normalized;   //랜덤방향의 벡터를 생성
+        float randDist = Random.Range(minDistB, maxDistB);  //오브젝트를 생성할 거리를 랜덤으로 받아냄
+
+        //플레이어 기준으로 특정 거리내에서 랜덤한 위치에 적 생성
+        Vector3 randPos = playerPos + new Vector3(randDir.x, randDir.y, 0) * randDist;
+        enemy.transform.position = randPos;
+    }
+
+    void SpawnBoss()   //플레이어를 따라가는 일반 적 생성
+    {
+        GameObject enemy = GameManager.Instance.pool.Get(11);    // index0에 해당하는 오브젝트를 가져옴
 
         Vector3 playerPos = GameManager.Instance.player.transform.position; //플레이어의 현재 위치값을 가져옴
         Vector2 randDir = Random.insideUnitCircle.normalized;   //랜덤방향의 벡터를 생성

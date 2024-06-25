@@ -117,11 +117,31 @@ public class EnemyCtrl : MonoBehaviour
                 transform.Translate(moveDir * (eSpeed*2) * Time.deltaTime); //오브젝트가 플레이어를 따라가도록 이동시킴
 
                 break;
+            case 4: //보스
+                playerPos = GameManager.Instance.player.transform.position; //플레이어의 실시간 좌표를 받아냄
+                pos = transform.position;   //오브젝트의 좌표를 받아냄
+                moveDir = (playerPos - pos).normalized;  //오브젝트로부터 플레이어까지의 정규벡터를 구함
+
+                transform.Translate(moveDir * eSpeed * Time.deltaTime); //오브젝트가 플레이어를 따라가도록 이동시킴
+
+                if (moveDir.x > 0 && sprite.flipX)   //오브젝트가 플레이어 방향을 바라보도록 flipX를 조절
+                {
+                    sprite.flipX = false;
+                }
+                else if (moveDir.x < 0 && !sprite.flipX)
+                {
+                    sprite.flipX = true;
+                }
+                break;
         }
 
         if(eHp < 0)
         {
             gameObject.SetActive(false);
+        }
+        if(eHp < 0 && enemyType == 4)
+        {
+            GameManager.Instance.GameClear();
         }
     }
 

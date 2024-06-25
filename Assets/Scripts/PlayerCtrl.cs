@@ -79,4 +79,8 @@ public class PlayerCtrl : MonoBehaviour
             }
         }
     }
+    public void GameOver()
+    {
+        GameManager.Instance.GameOver();
+    } 
 }

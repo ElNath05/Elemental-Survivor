@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class GameManager : MonoBehaviour
     public PlayerCtrl playerCtrl;
 
     private float sec;  //게임 시간 초를 세는 변수
-    [HideInInspector]public float min;  //게임 시간 분을 세는 변수
+    public float min;  //게임 시간 분을 세는 변수
 
     public float exp;
     public int level;
@@ -23,6 +24,7 @@ public class GameManager : MonoBehaviour
     public Slider hpGage;
     public LevelUp uiLevelUp;
     public GameObject gameOver;
+    public GameObject gameClear;
     void Awake()
     { if (Instance == null)
         {
@@ -80,6 +82,10 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        if(min > 20)
+        {
+            GameClear();
+        }
 
         float maxExp = 2 * (level + 2); //현재 레벨에 따라 다음 경험치 요구량을 설정
         if (exp > maxExp)  //경험치가 최대경험치를 넘으면 레벨업하고 경험치를 초기화
@@ -109,5 +115,15 @@ public class GameManager : MonoBehaviour
     {
         Pause();
         gameOver.SetActive(true);
+    }
+    public void GameClear()
+    {
+        Pause();
+        gameClear.SetActive(true);
+    }
+    public void Restart()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
