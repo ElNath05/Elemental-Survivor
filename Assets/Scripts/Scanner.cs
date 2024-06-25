@@ -19,15 +19,15 @@ public class Scanner : MonoBehaviour
         randTarget = GetRandomTarget();
     }
 
-    Transform GetRandomTarget() //레이범위에 들어온 타겟 중 랜덤한 하나의 타겟을 가져옴
+    Transform GetRandomTarget() //레이범위에 들어온 타겟 중 랜덤한 하나의 타겟의 위치를 가져옴
     {
-        if (targets.Length == 0)
+        if (targets.Length == 0)    //타겟이 없으면 탈출
             return null;
 
         Transform result = null;
-        int randNum = Random.Range(0, targets.Length);
+        int randNum = Random.Range(0, targets.Length);  //레이에 들어온 타겟 중 하나의 인덱스 값을 가져와
 
-        result = targets[randNum].transform;
+        result = targets[randNum].transform;    //그 인덱스값에 해당하는 타겟의 트랜스폼을 받아옴
         return result;
     }
 

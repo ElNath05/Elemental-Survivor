@@ -15,9 +15,11 @@ MonoBehaviour:
   itemType: 2
   itemId: 2
   itemName: "\uD654\uC5FC\uC9C0\uB300"
-  itemDesc: 
+  itemDesc: "\uD50C\uB808\uC774\uC5B4 \uC8FC\uBCC0\uC5D0 \uC9C0\uC18D\uC801\uC73C\uB85C
+    \uD53C\uD574\uB97C \uC8FC\uB294 \uC601\uC5ED\uD2B9\n\uD2B9\uC815\uB808\uBCA8
+    \uB3C4\uB2EC \uC2DC \uD06C\uAE30\uAC00 \uCEE4\uC9C4\uB2E4\n"
   itemIcon: {fileID: 4543038839386311801, guid: 9245ba1a77707483fa1c66a62c7a69a6, type: 3}
-  baseDamage: 1
+  baseDamage: 5
   baseCount: 1
   damages:
   - 0.5

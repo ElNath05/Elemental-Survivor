@@ -8,16 +8,22 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public GameObject player;
     public PoolManager pool;
+    public PlayerCtrl playerCtrl;
 
     private float sec;  //게임 시간 초를 세는 변수
-    private float min;  //게임 시간 분을 세는 변수
+    [HideInInspector]public float min;  //게임 시간 분을 세는 변수
 
     public float exp;
     public int level;
 
+    public bool isPlaying;
+
     public Text time;
     public Slider expGage;
-    private void Awake()
+    public Slider hpGage;
+    public LevelUp uiLevelUp;
+    public GameObject gameOver;
+    void Awake()
     { if (Instance == null)
         {
             Instance = this;
@@ -26,22 +32,31 @@ public class GameManager : MonoBehaviour
         {
 
         }
+
+        playerCtrl = player.GetComponent<PlayerCtrl>();
     }
     // Start is called before the first frame update
-    void Start()
+    public void GaneStart()
     {
-        
+
+        uiLevelUp.Select(0);
+        isPlaying = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        sec += Time.deltaTime; 
-        if(sec > 59.5)
+        if (!isPlaying) //게임이 정지하면 업데이트함수 내의 시간이 안가도록 한다
+            return;
+
+        sec += Time.deltaTime; //게임의 초를 계산
+        if(sec > 59.5)  //1분이 되면 분을 담당하는 변수에 +1
         {
             sec = 0;
             min += 1;
         }
+
+        //UI에 나오는 숫자가 각각 두자릿 수가 유지되도록 하는 코드
         if(min < 9.5)
         {
             if (sec < 9.5)
@@ -71,8 +86,28 @@ public class GameManager : MonoBehaviour
         {
             level++;
             exp = 0;
+            uiLevelUp.ShowLevelUp();
         }
 
         expGage.value = exp / maxExp;   //현재 경험치에 따른 경험치바량 설정
+        hpGage.value = playerCtrl.pHp/playerCtrl.maxHp;
+    }
+
+    public void Pause() //게임을 일시정지 시키는 함수
+    {
+        isPlaying = false;
+        Time.timeScale = 0;
+    }
+
+    public void Resume()    //정지된 게임을 다시 재생시키는 함수
+    {
+        isPlaying=true;
+        Time.timeScale = 1;
+    }
+
+    public void GameOver()
+    {
+        Pause();
+        gameOver.SetActive(true);
     }
 }

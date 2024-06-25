@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 3589335099773318301}
   - component: {fileID: 2275938709694472394}
   - component: {fileID: 9182094578494187954}
-  m_Layer: 0
+  - component: {fileID: 3497392457070050676}
+  m_Layer: 6
   m_Name: Skelet
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -106,3 +107,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3497392457070050676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3356337854450687206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d89f2293ad37c604c8d8968ca3dd991f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyType: 1
+  eSpeed: 3
+  hitTimer: 0
+  eHp: 40

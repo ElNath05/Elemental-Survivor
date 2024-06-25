@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da83fccece61e4346a159d283d69e58e, type: 3}
+  m_Name: ElectRay
+  m_EditorClassIdentifier: 
+  itemType: 2
+  itemId: 3
+  itemName: "\uC804\uAE30\uB808\uC774\uC800"
+  itemDesc: "\uD50C\uB808\uC774\uC5B4\uAC00 \uBCF4\uB294 \uBC29\uD5A5\uC73C\uB85C
+    \uB098\uAC00\uB294 \uBE54\n\uB808\uBCA8\uC5C5 \uC2DC \uBC1C\uC0AC \uC8FC\uAE30\uAC00
+    \uBE68\uB77C\uC9C4\uB2E4"
+  itemIcon: {fileID: -8844065285914177381, guid: c7858849fe794454ba9bed1d8d5c74cf, type: 3}
+  baseDamage: 10
+  baseCount: 1
+  damages:
+  - 0.25
+  - 0.5
+  - 1
+  - 1.5
+  - 2
+  counts: 0100000001000000010000000100000001000000
+  projectile: {fileID: 1550791008614822814, guid: 607c214457126064485b02d3a5f557f0, type: 3}

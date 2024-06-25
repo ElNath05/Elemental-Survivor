@@ -125,13 +125,6 @@ public class EnemyCtrl : MonoBehaviour
         }
     }
 
-    //IEnumerator KnockBack()
-    //{
-    //    yield return wait;
-    //    Vector3 playerPos = GameManager.Instance.player.transform.position;
-    //    Vector3 dirVec = transform.position - playerPos;
-    //    rb.AddForce(dirVec.normalized*3,ForceMode2D.Impulse);
-    //}
 
     private void Reset()    //오브젝트 변수들을 초기화 하는 함수
     {

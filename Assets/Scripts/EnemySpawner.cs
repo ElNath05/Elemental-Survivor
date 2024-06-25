@@ -7,12 +7,15 @@ public class EnemySpawner : MonoBehaviour
     private float e_SpawnTime;
     private float b_SpawnTime;
     private float m_SpawnTime;
+    private float bossSpawnTime;
 
     private float minDistB = 7.5f;  //Basic타입 적이 생성될 최소 거리
     private float maxDistB = 10f;   //Basic타입 적이 생성될 최대 거리
     // Update is called once per frame
     void Update()
     {
+        if (!GameManager.Instance.isPlaying) //게임이 정지하면 업데이트함수 내의 시간이 안가도록 한다
+            return;
         e_SpawnTime += Time.deltaTime; //적 생성 시간을 잼
         if(e_SpawnTime > 1.5f)   //생성시간이 되면 타이머를 초기화 하고 적 소환함수 실행
         {
@@ -27,13 +30,18 @@ public class EnemySpawner : MonoBehaviour
             SpawnBat();
         }
 
-        m_SpawnTime = Time.time;
+        m_SpawnTime += Time.deltaTime;
         if (m_SpawnTime > 300f || Input.GetKeyDown(KeyCode.Space))
         {
             m_SpawnTime = 0;
             SpawnRound();
         }
 
+        //bossSpawnTime += Time.time;
+        //if(bossSpawnTime >= 600f || Input.GetKeyDown(KeyCode.P))
+        //{
+
+        //}
     }
     void SpawnBasic()   //플레이어를 따라가는 일반 적 생성
     {
