@@ -135,13 +135,13 @@ public class EnemyCtrl : MonoBehaviour
                 break;
         }
 
-        if(eHp < 0)
-        {
-            gameObject.SetActive(false);
-        }
-        if(eHp < 0 && enemyType == 4)
+        if (eHp < 0 && enemyType == 4)
         {
             GameManager.Instance.GameClear();
+        }
+        if (eHp < 0)
+        {
+            gameObject.SetActive(false);
         }
     }
 

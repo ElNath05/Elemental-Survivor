@@ -19,19 +19,19 @@ public class EnemySpawner : MonoBehaviour
         if (!GameManager.Instance.isPlaying) //게임이 정지하면 업데이트함수 내의 시간이 안가도록 한다
             return;
         e_SpawnTime += Time.deltaTime; //적 생성 시간을 잼
-        if(e_SpawnTime > 0.75f && GameManager.Instance.min <= 3)   //생성시간이 되면 타이머를 초기화 하고 적 소환함수 실행
+        if(e_SpawnTime > 0.5f && GameManager.Instance.min <= 1.5)   //생성시간이 되면 타이머를 초기화 하고 적 소환함수 실행
         {
             e_SpawnTime = 0;
             SpawnBasic();
         }
 
-        if (e_SpawnTime > 0.75f && GameManager.Instance.min >= 3 && GameManager.Instance.min < 5)   //생성시간이 되면 타이머를 초기화 하고 적 소환함수 실행
+        if (e_SpawnTime > 0.35f && GameManager.Instance.min >= 1.5 && GameManager.Instance.min < 3)   //생성시간이 되면 타이머를 초기화 하고 적 소환함수 실행
         {
             e_SpawnTime = 0;
             SpawnBasic2();
         }
 
-        if (e_SpawnTime > 0.75f && GameManager.Instance.min >= 5)   //생성시간이 되면 타이머를 초기화 하고 적 소환함수 실행
+        if (e_SpawnTime > 0.25f && GameManager.Instance.min >= 3)   //생성시간이 되면 타이머를 초기화 하고 적 소환함수 실행
         {
             e_SpawnTime = 0;
             SpawnBasic3();

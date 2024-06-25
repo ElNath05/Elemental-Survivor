@@ -100,7 +100,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if(min > 20)
+        if(min > 5)
         {
             GameClear();
         }
