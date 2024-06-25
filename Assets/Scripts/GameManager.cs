@@ -44,6 +44,24 @@ public class GameManager : MonoBehaviour
         uiLevelUp.Select(0);
         isPlaying = true;
     }
+    public void GaneStart2()
+    {
+
+        uiLevelUp.Select(4);
+        isPlaying = true;
+    }
+    public void GaneStart3()
+    {
+
+        uiLevelUp.Select(3);
+        isPlaying = true;
+    }
+    public void GaneStart4()
+    {
+
+        uiLevelUp.Select(1);
+        isPlaying = true;
+    }
 
     // Update is called once per frame
     void Update()
